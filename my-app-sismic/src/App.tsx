@@ -1,11 +1,11 @@
 import React from 'react';
-import UsersTable from './componants/UsersList';
+import UsersList from './componants/UsersList';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <UsersTable />
+      <UsersList />
     </div>
   );
 }

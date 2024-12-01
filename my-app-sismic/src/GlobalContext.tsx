@@ -17,9 +17,19 @@ export interface ApiResponse {
     results: User[];
 }
 
+interface FormData {
+    firstname: string;
+    lastname: string;
+    email: string;
+    age: string;
+    isActive: boolean;
+}
+
 interface GlobalState {
     users: User[];
     setUsers: (users: User[]) => void;
+    addUser: (formData: FormData) => void;
+    deleteUser: (id: number) => void;
 }
 
 const GlobalContext = createContext<GlobalState | undefined>(undefined);
@@ -50,12 +60,35 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
     };
 
+    // Function to add a new user
+    const addUser = (formData: FormData) => {
+        const newUser = {
+            id: Math.floor(Math.random() * 1000),
+            name: {
+                first: formData.firstname,
+                last: formData.lastname,
+            },
+            email: formData.email,
+            dob: {
+                age: parseInt(formData.age, 10),
+            },
+            isActive: formData.isActive,
+        };
+
+        setUsers([...users, newUser]);
+    };
+
+    // Function to delete a user
+    const deleteUser = (id: number) => {
+        setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
+    };
+
     useEffect(() => {
         fetchUsers();
     }, []);
 
     return (
-        <GlobalContext.Provider value={{ users, setUsers }}>
+        <GlobalContext.Provider value={{ users, setUsers, addUser, deleteUser }}>
             {children}
         </GlobalContext.Provider>
     );

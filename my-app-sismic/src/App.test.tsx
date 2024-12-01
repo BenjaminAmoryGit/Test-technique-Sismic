@@ -1,9 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'
 import App from './App';
+import { GlobalProvider } from './GlobalContext';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders Users list heading', () => {
+  render(
+      <GlobalProvider>
+          <App />
+      </GlobalProvider>
+  );
+
+  const headingElement = screen.getByText(/Users list/i);
+  expect(headingElement).toBeInTheDocument();
 });

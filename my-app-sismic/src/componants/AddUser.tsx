@@ -105,7 +105,7 @@ const AddUser: React.FC = () => {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Add user
+                Add new user
             </Button>
 
             <Modal show={show} onHide={handleClose}>

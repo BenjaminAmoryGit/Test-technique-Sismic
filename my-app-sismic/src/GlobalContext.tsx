@@ -35,8 +35,7 @@ interface GlobalState {
 const GlobalContext = createContext<GlobalState | undefined>(undefined);
 
 export const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [users, setUsers] = useState<User[]>([]); // Initialize with an empty array
-    const [loading, setLoading] = useState<boolean>(true);
+    const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     // Function to fetch user data
@@ -55,8 +54,6 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             setUsers(usersWithIds);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An unknown error occurred');
-        } finally {
-            setLoading(false);
         }
     };
 
